@@ -1,18 +1,17 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ComponentPropsWithoutRef, ReactNode } from "react";
 
-interface ButtonProps {
+type Props = ComponentPropsWithoutRef<'button'> & {
   children: ReactNode;
-  className?: string;
-  appName: string;
+  onClick?: () => Promise<void> | void;
 }
 
-export const Button = ({ children, className, appName }: ButtonProps) => {
+export const Button: React.FC<Props> = ({ children, onClick, ...Props }) => {
   return (
     <button
-      className={className}
-      onClick={() => alert(`Hello from your ${appName} app!`)}
+      {...Props}
+      onClick={onClick}
     >
       {children}
     </button>
